@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<h1>Lista de Clientes</h1>
+
+<a href="/cliente/">Cadastrar novo cliente</a>
+
+<ul>
+    {% for cliente in clientes %}
+        <li>
+            {{ cliente.nome }} - {{ cliente.telefone }}
+
+            <a href="{% url 'editar_cliente' cliente.id %}">Editar</a>
+
+            <form action="{% url 'excluir_cliente' cliente.id %}" method="post" style="display:inline;">
+                {% csrf_token %}
+                <button type="submit">Excluir</button>
+            </form>
+        </li>
+    {% endfor %}
+</ul>
+
+</body>
+</html>

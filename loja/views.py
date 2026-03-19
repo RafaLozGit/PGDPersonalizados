@@ -60,3 +60,51 @@ def excluir_pedido(request, id):
     pedido = Pedido.objects.get(id=id)
     pedido.delete()
     return redirect('home')
+
+from django.shortcuts import get_object_or_404
+
+
+def lista_clientes(request):
+    clientes = Cliente.objects.all()
+    return render(request, 'lista_clientes.html', {'clientes': clientes})
+
+
+def editar_cliente(request, id):
+    cliente = get_object_or_404(Cliente, id=id)
+
+    if request.method == 'POST':
+        cliente.nome = request.POST.get('nome')
+        cliente.telefone = request.POST.get('telefone')
+        cliente.save()
+        return redirect('lista_clientes')
+
+    return render(request, 'editar_cliente.html', {'cliente': cliente})
+
+
+
+def lista_produtos(request):
+    produtos = Produto.objects.all()
+    return render(request, 'lista_produtos.html', {'produtos': produtos})
+
+
+def editar_produto(request, id):
+    produto = get_object_or_404(Produto, id=id)
+
+    if request.method == 'POST':
+        produto.nome = request.POST.get('nome')
+        produto.preco = float(request.POST.get('preco'))
+        produto.save()
+        return redirect('lista_produtos')
+
+    return render(request, 'editar_produto.html', {'produto': produto})
+
+def excluir_cliente(request, id):
+    if request.method == 'POST':
+        cliente = Cliente.objects.get(id=id)
+        cliente.delete()
+    return redirect('lista_clientes')
+
+def excluir_produto(request, id):
+    produto = Produto.objects.get(id=id)
+    produto.delete()
+    return redirect('lista_produtos')
