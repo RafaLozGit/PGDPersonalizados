@@ -1,30 +1,70 @@
+{% load static %}
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>PGDPersonalizados</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
 </head>
 <body>
+    <!-- Header -->
+    <header>
+        <h1>PGD Personalizados</h1>
+        <nav>
+            <a href="{% url 'cliente_list' %}">Clientes</a>
+            <a href="{% url 'produto_list' %}">Produtos</a>
+            <a href="{% url 'pedido_list' %}">Pedidos</a>
+        </nav>
+    </header>
 
-<h1>PGDPersonalizados - Pedidos</h1>
+    <!-- Welcome -->
+    <section class="welcome">
+        <h2>Bem-vindo à PGD Personalizados!</h2>
+        <p>Cadastre, visualize e gerencie clientes, produtos e pedidos de forma prática.</p>
+    </section>
 
-<a href="/cliente/">Cadastrar Cliente</a><br>
-<a href="/produto/">Cadastrar Produto</a><br>
-<a href="/pedido/">Novo Pedido</a>
+    <!-- Cards de acesso rápido -->
+    <section class="cards">
+        <div class="card">
+            <h3>Clientes</h3>
+            <p>Gerencie todos os clientes cadastrados.</p>
+            <a href="{% url 'cliente_list' %}">Ver Clientes</a>
+        </div>
+        <div class="card">
+            <h3>Produtos</h3>
+            <p>Confira os produtos disponíveis e seus detalhes.</p>
+            <a href="{% url 'produto_list' %}">Ver Produtos</a>
+        </div>
+        <div class="card">
+            <h3>Pedidos</h3>
+            <p>Visualize e controle todos os pedidos.</p>
+            <a href="{% url 'pedido_list' %}">Ver Pedidos</a>
+        </div>
+    </section>
 
-<ul>
-    {% for p in pedidos %}
-        <li>
-            Cliente: {{ p.cliente.nome }} |
-            Produto: {{ p.produto.nome }} |
-            Qtd: {{ p.quantidade }} |
-            Total: R$ {{ p.total }}
+    <!-- Lista de pedidos -->
+    <section class="pedido-list">
+        <h2>Pedidos Recentes</h2>
+        <ul>
+            {% for p in pedidos %}
+                <li>
+                    <strong>Cliente:</strong> {{ p.cliente.nome }} |
+                    <strong>Produto:</strong> {{ p.produto.nome }} |
+                    <strong>Qtd:</strong> {{ p.quantidade }} |
+                    <strong>Total:</strong> R$ {{ p.total }}
+                    <a href="/excluir/{{ p.id }}/" class="excluir">Excluir</a>
+                </li>
+            {% empty %}
+                <li>Nenhum pedido cadastrado.</li>
+            {% endfor %}
+        </ul>
+    </section>
 
-            <a href="/excluir/{{ p.id }}/">Excluir</a>
-        </li>
-    {% endfor %}
-</ul>
-
+    <!-- Footer -->
+    <footer>
+        <p>© 2026 PGD Personalizados</p>
+    </footer>
 </body>
 </html>
 
