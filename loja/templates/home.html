@@ -53,7 +53,7 @@
                     <strong>Produto:</strong> {{ p.produto.nome }} |
                     <strong>Qtd:</strong> {{ p.quantidade }} |
                     <strong>Total:</strong> R$ {{ p.total }}
-                    <a href="/excluir/{{ p.id }}/" class="excluir">Excluir</a>
+                    <a href="{% url 'excluir' p.id %}" class="excluir">Excluir</a>
                 </li>
             {% empty %}
                 <li>Nenhum pedido cadastrado.</li>
@@ -67,5 +67,3 @@
     </footer>
 </body>
 </html>
-
-
