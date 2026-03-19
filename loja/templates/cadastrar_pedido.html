@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<h1>Novo Pedido</h1>
+
+<form method="post">
+    {% csrf_token %}
+
+    Cliente:
+    <select name="cliente">
+        {% for c in clientes %}
+            <option value="{{ c.id }}">{{ c.nome }}</option>
+        {% endfor %}
+    </select>
+
+    <br>
+
+    Produto:
+    <select name="produto">
+        {% for p in produtos %}
+            <option value="{{ p.id }}">{{ p.nome }}</option>
+        {% endfor %}
+    </select>
+
+    <br>
+
+    Quantidade:
+    <input type="number" name="quantidade">
+
+    <br>
+    <button type="submit">Salvar</button>
+</form>
+
+</body>
+</html>
